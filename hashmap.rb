@@ -61,4 +61,11 @@ class HashMap
   def clear
     self.buckets = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
   end
+
+  def keys
+    lists = buckets.compact
+    keys = []
+    lists.map { |element| keys << element.head.key }
+    keys
+  end
 end
