@@ -53,4 +53,8 @@ class HashMap
     buckets[hash_code_index] = nil
     value
   end
+
+  def length
+    buckets.compact.size
+  end
 end
