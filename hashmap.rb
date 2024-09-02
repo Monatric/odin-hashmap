@@ -3,13 +3,15 @@ require_relative "linked_list"
 
 # HashMap
 class HashMap
-  attr_accessor :buckets, :capacity, :load_factor
+  attr_accessor :buckets, :capacity, :load_factor, :entries
 
   def initialize
-    @buckets = []
-    16.times { @buckets << LinkedList.new }
+    @buckets = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+    # 16.times { @buckets << LinkedList.new }
     @capacity = buckets.size
     @load_factor = 0.8
+    @entries = (capacity * load_factor).round
+    p entries
   end
 
   def hash(key)
@@ -22,9 +24,9 @@ class HashMap
   end
 
   def set(key, value)
-    hash_code = hash(key)
-    hash_code_index = hash_code % capacity
-    if buckets[hash_code_index].head.nil?
+    hash_code_index = hash(key) % capacity
+    if buckets[hash_code_index].nil?
+      buckets[hash_code_index] = LinkedList.new
       buckets[hash_code_index].append(key, value)
     elsif buckets[hash_code_index].contains?(key)
       buckets[hash_code_index].head.value = value
