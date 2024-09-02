@@ -4,4 +4,5 @@ require_relative "node"
 test = HashMap.new
 test.set("sean", "zidane")
 test.set("sean", "dumlao")
-p test.get("sean")
+p test.buckets[15]
+p test.remove("sean")

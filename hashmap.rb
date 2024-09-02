@@ -10,7 +10,6 @@ class HashMap
     @capacity = buckets.size
     @load_factor = 0.8
     @entries = (capacity * load_factor).round
-    p entries
   end
 
   def hash(key)
@@ -47,5 +46,11 @@ class HashMap
   end
 
   def remove(key)
+    hash_code_index = hash(key) % capacity
+    return nil unless buckets[hash_code_index].head.key == key
+
+    value = buckets[hash_code_index].head.value
+    buckets[hash_code_index] = nil
+    value
   end
 end
