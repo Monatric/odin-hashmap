@@ -57,4 +57,8 @@ class HashMap
   def length
     buckets.compact.size
   end
+
+  def clear
+    self.buckets = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+  end
 end
