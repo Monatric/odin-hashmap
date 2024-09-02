@@ -1,4 +1,5 @@
 require_relative "hashmap"
 
 test = HashMap.new
-p test.buckets
+test2 = test.set("t", "t")
+p test.buckets[4].key
