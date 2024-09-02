@@ -40,4 +40,9 @@ class HashMap
     hash_code_index = hash(key) % capacity
     buckets[hash_code_index].head.value if buckets[hash_code_index].head.key == key
   end
+
+  def has?(key)
+    hash_code_index = hash(key) % capacity
+    buckets[hash_code_index].head.key == key
+  end
 end
