@@ -35,4 +35,9 @@ class HashMap
       buckets[hash_code_index].append(key, value)
     end
   end
+
+  def get(key)
+    hash_code_index = hash(key) % capacity
+    buckets[hash_code_index].head.value if buckets[hash_code_index].head.key == key
+  end
 end
