@@ -7,7 +7,6 @@ class HashMap
 
   def initialize
     @buckets = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
-    # 16.times { @buckets << LinkedList.new }
     @capacity = buckets.size
     @load_factor = 0.8
     @entries = (capacity * load_factor).round
@@ -24,6 +23,8 @@ class HashMap
   end
 
   def set(key, value)
+    capacity.times { buckets << nil } if buckets.compact.size >= entries
+
     hash_code_index = hash(key) % capacity
     if buckets[hash_code_index].nil?
       buckets[hash_code_index] = LinkedList.new
