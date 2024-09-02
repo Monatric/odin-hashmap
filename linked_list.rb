@@ -19,4 +19,24 @@ class LinkedList
       self.tail = temp.next_node
     end
   end
+
+  def size
+    counter = 0
+    temp = @head
+    until temp.nil?
+      counter += 1
+      temp = temp.next_node
+    end
+    counter
+  end
+
+  def contains?(key)
+    temp = @head
+    until temp.nil?
+      return true if temp.key == key
+      return false if temp.next_node.nil?
+
+      temp = temp.next_node
+    end
+  end
 end

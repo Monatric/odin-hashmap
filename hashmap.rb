@@ -26,8 +26,10 @@ class HashMap
     hash_code_index = hash_code % capacity
     if buckets[hash_code_index].head.nil?
       buckets[hash_code_index].append(key, value)
-    else
+    elsif buckets[hash_code_index].contains?(key)
       buckets[hash_code_index].head.value = value
+    else
+      buckets[hash_code_index].append(key, value)
     end
   end
 end
