@@ -38,11 +38,14 @@ class HashMap
 
   def get(key)
     hash_code_index = hash(key) % capacity
-    buckets[hash_code_index].head.value if buckets[hash_code_index].head.key == key
+    buckets[hash_code_index].head.key == key ? buckets[hash_code_index].head.value : nil
   end
 
   def has?(key)
     hash_code_index = hash(key) % capacity
     buckets[hash_code_index].head.key == key
+  end
+
+  def remove(key)
   end
 end
