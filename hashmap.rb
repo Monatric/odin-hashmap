@@ -7,7 +7,7 @@ class HashMap
 
   def initialize
     @buckets = []
-    16.times { @buckets << [LinkedList.new] }
+    16.times { @buckets << LinkedList.new }
     @capacity = buckets.size
     @load_factor = 0.8
   end
@@ -24,8 +24,10 @@ class HashMap
   def set(key, value)
     hash_code = hash(key)
     hash_code_index = hash_code % capacity
-    p hash_code_index
-    buckets[hash_code_index].append(key, value)
-    p buckets[hash_code_index]
+    if buckets[hash_code_index].head.nil?
+      buckets[hash_code_index].append(key, value)
+    else
+      buckets[hash_code_index].head.value = value
+    end
   end
 end
