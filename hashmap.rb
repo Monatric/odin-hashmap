@@ -3,13 +3,13 @@ require_relative "linked_list"
 
 # HashMap
 class HashMap
-  attr_accessor :buckets, :capacity, :load_factor, :entries
+  attr_accessor :buckets, :capacity, :load_factor, :total_entries
 
   def initialize
     @buckets = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
     @capacity = buckets.size
     @load_factor = 0.8
-    @entries = (capacity * load_factor).round
+    @total_entries = (capacity * load_factor).round
   end
 
   def hash(key)
@@ -22,7 +22,7 @@ class HashMap
   end
 
   def set(key, value)
-    capacity.times { buckets << nil } if buckets.compact.size >= entries
+    capacity.times { buckets << nil } if buckets.compact.size >= total_entries
 
     hash_code_index = hash(key) % capacity
     if buckets[hash_code_index].nil?
@@ -74,5 +74,14 @@ class HashMap
     values = []
     lists.map { |element| values << element.head.value }
     values
+  end
+
+  def entries
+    lists = buckets.compact
+    entries = []
+    lists.map do |element|
+      entries << [element.head.key, element.head.value]
+    end
+    entries
   end
 end
