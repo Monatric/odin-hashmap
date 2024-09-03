@@ -22,21 +22,42 @@ class HashMap
   end
 
   def set(key, value)
-    capacity.times { buckets << nil } if buckets.compact.size >= total_entries
-
     hash_code_index = hash(key) % capacity
-    if buckets[hash_code_index].nil?
-      buckets[hash_code_index] = LinkedList.new
-      buckets[hash_code_index].append(key, value)
-    elsif buckets[hash_code_index].contains?(key)
-      buckets[hash_code_index].head.value = value
+    insert(hash_code_index, key, value)
+
+    return unless entries.size > total_entries
+
+    old_bucket = entries
+    old_capacity = capacity
+    clear
+    old_capacity.times { buckets << nil }
+    self.capacity = buckets.length
+    self.total_entries = (capacity * load_factor).round
+    old_bucket.each do |bucket|
+      hash_code_index = hash(bucket[0]) % capacity
+
+      insert(hash_code_index, bucket[0], bucket[1])
+    end
+  end
+
+  def grow
+  end
+
+  def insert(index, key, value)
+    if buckets[index].nil?
+      buckets[index] = LinkedList.new
+      buckets[index].append(key, value)
+    elsif buckets[index].contains?(key)
+      buckets[index].head.value = value
     else
-      buckets[hash_code_index].append(key, value)
+      buckets[index].append(key, value)
     end
   end
 
   def get(key)
     hash_code_index = hash(key) % capacity
+    return nil if buckets[hash_code_index].nil?
+
     buckets[hash_code_index].head.key == key ? buckets[hash_code_index].head.value : nil
   end
 
@@ -55,7 +76,7 @@ class HashMap
   end
 
   def length
-    buckets.compact.size
+    entries.size
   end
 
   def clear
