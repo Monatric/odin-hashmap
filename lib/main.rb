@@ -23,4 +23,4 @@ test.set("moon", "silver")
 
 test.set("jacket", "testthree")
 p test.buckets.size
-p test.entries
+p test.get("jacket")

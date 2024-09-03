@@ -23,6 +23,8 @@ class HashMap
 
   def set(key, value)
     hash_code_index = hash(key) % capacity
+    raise IndexError if index.negative? || index >= @buckets.length
+
     insert(hash_code_index, key, value)
 
     grow if entries.size > total_entries
