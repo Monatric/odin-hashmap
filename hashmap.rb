@@ -68,4 +68,11 @@ class HashMap
     lists.map { |element| keys << element.head.key }
     keys
   end
+
+  def values
+    lists = buckets.compact
+    values = []
+    lists.map { |element| values << element.head.value }
+    values
+  end
 end
