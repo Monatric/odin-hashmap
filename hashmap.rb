@@ -80,7 +80,13 @@ class HashMap
     lists = buckets.compact
     entries = []
     lists.map do |element|
-      entries << [element.head.key, element.head.value]
+      temp = element.head
+
+      until temp.nil?
+        entries << [temp.key, temp.value]
+
+        temp = temp.next_node
+      end
     end
     entries
   end

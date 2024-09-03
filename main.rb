@@ -1,5 +1,6 @@
 require_relative "hashmap"
 require_relative "node"
+require "pry-byebug"
 
 test = HashMap.new
 test.set("apple", "red")
@@ -16,6 +17,5 @@ test.set("kite", "pink")
 test.set("lion", "golden")
 
 test.set("jacket", "test")
-p test.entries
+p test.entries.size
 test.set("moon", "silver")
-p test.buckets.size
