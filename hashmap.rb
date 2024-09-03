@@ -8,7 +8,7 @@ class HashMap
   def initialize
     @buckets = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
     @capacity = buckets.size
-    @load_factor = 0.8
+    @load_factor = 0.75
     @total_entries = (capacity * load_factor).round
   end
 
