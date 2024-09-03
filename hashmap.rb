@@ -25,8 +25,10 @@ class HashMap
     hash_code_index = hash(key) % capacity
     insert(hash_code_index, key, value)
 
-    return unless entries.size > total_entries
+    grow if entries.size > total_entries
+  end
 
+  def grow
     old_bucket = entries
     old_capacity = capacity
     clear
@@ -38,9 +40,6 @@ class HashMap
 
       insert(hash_code_index, bucket[0], bucket[1])
     end
-  end
-
-  def grow
   end
 
   def insert(index, key, value)
